@@ -2,44 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=1200, initial-scale=1.0"> <!-- Modified viewport to force desktop width -->
     <title>CONFPROPRIETA' Charts</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
             margin: 0;
             padding: 20px;
-            background-color: #f8f9fa; /* Very light gray background */
-            color: #495057; /* Slightly softer text color */
-            line-height: 1.7; /* Slightly increased line height for readability */
-            display: none; /* Initially hide the body content */
+            background-color: #f8f9fa; 
+            color: #495057; 
+            line-height: 1.7; 
+            display: none; 
         }
 
         body.visible {
-            display: block; /* Show body content when password is correct */
+            display: block; 
         }
 
         .container {
-            max-width: 1000px; /* Slightly wider container */
-            margin: 30px auto; /* Increased top margin */
-            background-color: #ffffff; /* Pure white container */
-            padding: 40px; /* Increased padding */
-            border-radius: 12px; /* More rounded corners */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* Softer, more pronounced shadow */
+            max-width: 1000px; 
+            margin: 30px auto; 
+            background-color: #ffffff; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
         }
 
         h1 {
             text-align: center;
-            color: #212529; /* Darker heading color */
-            margin-bottom: 40px; /* Increased bottom margin for heading */
-            font-size: 2.2em; /* Slightly larger heading */
-            font-weight: 600; /* Semi-bold heading */
+            color: #212529; 
+            margin-bottom: 40px; 
+            font-size: 2.2em; 
+            font-weight: 600; 
         }
 
         .chart-section {
-            margin-bottom: 50px; /* Increased spacing between sections */
-            border-bottom: 1px solid #e0e0e0; /* Slightly darker border color */
-            padding-bottom: 40px; /* Increased padding below section */
+            margin-bottom: 50px; 
+            border-bottom: 1px solid #e0e0e0; 
+            padding-bottom: 40px; 
         }
 
         .chart-section:last-child {
@@ -48,24 +48,21 @@
             padding-bottom: 0;
         }
 
-
         .chart-iframe-container {
             position: relative;
             width: 100%;
-            padding-bottom: 62%; /* Default aspect ratio */
+            padding-bottom: 62%; 
             height: 0;
             overflow: hidden;
-            border-radius: 8px; /* More rounded corners for chart container */
-            box-shadow: 0 3px 7px rgba(0,0,0,0.06); /* Softer shadow for chart container */
-            transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+            border-radius: 8px; 
+            box-shadow: 0 3px 7px rgba(0,0,0,0.06); 
+            transition: box-shadow 0.3s ease; 
         }
 
-        /* Aspect ratio adjustments for each chart based on original dimensions */
-        .chart-iframe-container.ratio-1 { padding-bottom: 62%; } /* Chart 1: 597x371 (approx 62%) */
-        .chart-iframe-container.ratio-2 { padding-bottom: 62%; } /* Chart 2: 890x550 (approx 62%) */
-        .chart-iframe-container.ratio-3 { padding-bottom: 31%; } /* Chart 3: 1199x371 (approx 31%) */
-        .chart-iframe-container.ratio-4 { padding-bottom: 41%; } /* Chart 4: 906x371 (approx 41%) */
-
+        .chart-iframe-container.ratio-1 { padding-bottom: 62%; } 
+        .chart-iframe-container.ratio-2 { padding-bottom: 62%; } 
+        .chart-iframe-container.ratio-3 { padding-bottom: 31%; } 
+        .chart-iframe-container.ratio-4 { padding-bottom: 41%; } 
 
         .chart-iframe {
             position: absolute;
@@ -74,24 +71,9 @@
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 8px; /* Match container border-radius */
+            border-radius: 8px; 
         }
 
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 30px;
-                margin: 20px auto;
-            }
-            h1 {
-                font-size: 1.8em;
-                margin-bottom: 30px;
-            }
-            .chart-section {
-                margin-bottom: 40px;
-                padding-bottom: 30px;
-            }
-        }
     </style>
 </head>
 <body>
@@ -126,15 +108,14 @@
 
     <script>
         function checkPassword() {
-            const base64Password = "ZGVyb3NhMjAyNA=="; // Base64 encoded "derosa2024"
+            const base64Password = "ZGVyb3NhMjAyNA=="; 
             const correctPassword = atob(base64Password);
             let password = prompt("Password Required: Access to this page is restricted. Please enter the password to continue.");
             if (password === correctPassword) {
-                document.body.classList.add("visible"); // Show the page content
+                document.body.classList.add("visible"); 
             } else {
                 alert("Incorrect password. Access denied.");
-                // Optionally, you can redirect to another page or close the window.
-                // For now, we will just not show the content.
+
             }
         }
 
