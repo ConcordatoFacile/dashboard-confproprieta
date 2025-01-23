@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="initial-scale=1.0"> <!-- Removed width=1200 -->
+    <meta name="viewport" content="width=1200, initial-scale=1.0"> <!-- Restored width=1200 to force desktop view -->
     <title>CONFPROPRIETA' Charts</title>
     <style>
         body {
@@ -76,9 +76,9 @@
 
         /* Navigation Tip Styles */
         #navigation-tip {
-            position: fixed;
+            position: fixed; /* Keep fixed positioning */
             bottom: 20px;
-            right: 20px;
+            /* Right will be set by JavaScript */
             background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
             padding: 15px;
             border-radius: 10px;
@@ -116,25 +116,25 @@
 
         <div class="chart-section">
             <div class="chart-iframe-container ratio-1">
-                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=577759918&amp;format=interactive"></iframe>
+                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=577759918&format=interactive"></iframe>
             </div>
         </div>
 
         <div class="chart-section">
             <div class="chart-iframe-container ratio-2">
-                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=1395627886&amp;format=interactive"></iframe>
+                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=1395627886&format=interactive"></iframe>
             </div>
         </div>
 
         <div class="chart-section">
             <div class="chart-iframe-container ratio-3">
-                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=1269370620&amp;format=interactive"></iframe>
+                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=1269370620&format=interactive"></iframe>
             </div>
         </div>
 
         <div class="chart-section">
             <div class="chart-iframe-container ratio-4">  <!-- Added ratio-4 class here -->
-                <iframe class="chart-iframe" seamless frameborder="0" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=551369397&amp;format=interactive"></iframe>
+                <iframe class="chart-iframe" seamless frameborder="0" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=551369397&format=interactive"></iframe>
             </div>
         </div>
 
@@ -152,10 +152,19 @@
             let password = prompt("Password Required: Access to this page is restricted. Please enter the password to continue.");
             if (password === correctPassword) {
                 document.body.classList.add("visible");
+                // Position the navigation tip after the password is correct and body is visible
+                positionNavigationTip();
             } else {
                 alert("Incorrect password. Access denied.");
             }
         }
+
+        function positionNavigationTip() {
+            const tip = document.getElementById('navigation-tip');
+            const screenWidth = window.innerWidth;
+            tip.style.right = '20px'; // You can adjust '20px' as needed for margin from the right edge of the *screen*
+        }
+
 
         window.onload = checkPassword;
     </script>
