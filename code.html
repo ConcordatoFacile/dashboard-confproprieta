@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CONFPROPRIETA' Charts</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa; /* Very light gray background */
+            color: #495057; /* Slightly softer text color */
+            line-height: 1.7; /* Slightly increased line height for readability */
+            display: none; /* Initially hide the body content */
+        }
+
+        body.visible {
+            display: block; /* Show body content when password is correct */
+        }
+
+        .container {
+            max-width: 1000px; /* Slightly wider container */
+            margin: 30px auto; /* Increased top margin */
+            background-color: #ffffff; /* Pure white container */
+            padding: 40px; /* Increased padding */
+            border-radius: 12px; /* More rounded corners */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); /* Softer, more pronounced shadow */
+        }
+
+        h1 {
+            text-align: center;
+            color: #212529; /* Darker heading color */
+            margin-bottom: 40px; /* Increased bottom margin for heading */
+            font-size: 2.2em; /* Slightly larger heading */
+            font-weight: 600; /* Semi-bold heading */
+        }
+
+        .chart-section {
+            margin-bottom: 50px; /* Increased spacing between sections */
+            border-bottom: 1px solid #e0e0e0; /* Slightly darker border color */
+            padding-bottom: 40px; /* Increased padding below section */
+        }
+
+        .chart-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+
+        .chart-iframe-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 62%; /* Default aspect ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px; /* More rounded corners for chart container */
+            box-shadow: 0 3px 7px rgba(0,0,0,0.06); /* Softer shadow for chart container */
+            transition: box-shadow 0.3s ease; /* Smooth shadow transition on hover */
+        }
+
+        /* Aspect ratio adjustments for each chart based on original dimensions */
+        .chart-iframe-container.ratio-1 { padding-bottom: 62%; } /* Chart 1: 597x371 (approx 62%) */
+        .chart-iframe-container.ratio-2 { padding-bottom: 62%; } /* Chart 2: 890x550 (approx 62%) */
+        .chart-iframe-container.ratio-3 { padding-bottom: 31%; } /* Chart 3: 1199x371 (approx 31%) */
+        .chart-iframe-container.ratio-4 { padding-bottom: 41%; } /* Chart 4: 906x371 (approx 41%) */
+
+
+        .chart-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 8px; /* Match container border-radius */
+        }
+
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 30px;
+                margin: 20px auto;
+            }
+            h1 {
+                font-size: 1.8em;
+                margin-bottom: 30px;
+            }
+            .chart-section {
+                margin-bottom: 40px;
+                padding-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>DASHBOARD CONFPROPRIETA'</h1>
+
+        <div class="chart-section">
+            <div class="chart-iframe-container ratio-1">
+                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=577759918&amp;format=interactive"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="chart-iframe-container ratio-2">
+                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=1395627886&amp;format=interactive"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="chart-iframe-container ratio-3">
+                <iframe class="chart-iframe" seamless frameborder="0"  src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=1269370620&amp;format=interactive"></iframe>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="chart-iframe-container ratio-4">  <!-- Added ratio-4 class here -->
+                <iframe class="chart-iframe" seamless frameborder="0" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQtKuwIaMIyTnusxmNLy5NnKIZEI8UgRBni8b3I7XwZjll8_lJLAa29NG1aUao1ezrQr6v1l3I6HiFf/pubchart?oid=551369397&amp;format=interactive"></iframe>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        function checkPassword() {
+            const base64Password = "ZGVyb3NhMjAyNA=="; // Base64 encoded "derosa2024"
+            const correctPassword = atob(base64Password);
+            let password = prompt("Password Required: Access to this page is restricted. Please enter the password to continue.");
+            if (password === correctPassword) {
+                document.body.classList.add("visible"); // Show the page content
+            } else {
+                alert("Incorrect password. Access denied.");
+                // Optionally, you can redirect to another page or close the window.
+                // For now, we will just not show the content.
+            }
+        }
+
+        window.onload = checkPassword;
+    </script>
+</body>
+</html>
