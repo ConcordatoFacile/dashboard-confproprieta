@@ -6,40 +6,40 @@
     <title>CONFPROPRIETA' Charts</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
-            background-color: #f8f9fa; 
-            color: #495057; 
-            line-height: 1.7; 
-            display: none; 
+            background-color: #f8f9fa;
+            color: #495057;
+            line-height: 1.7;
+            display: none;
         }
 
         body.visible {
-            display: block; 
+            display: block;
         }
 
         .container {
-            max-width: 1000px; 
-            margin: 30px auto; 
-            background-color: #ffffff; 
-            padding: 40px; 
-            border-radius: 12px; 
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08); 
+            max-width: 1000px;
+            margin: 30px auto;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
         }
 
         h1 {
             text-align: center;
-            color: #212529; 
-            margin-bottom: 40px; 
-            font-size: 2.2em; 
-            font-weight: 600; 
+            color: #212529;
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            font-weight: 600;
         }
 
         .chart-section {
-            margin-bottom: 50px; 
-            border-bottom: 1px solid #e0e0e0; 
-            padding-bottom: 40px; 
+            margin-bottom: 50px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 40px;
         }
 
         .chart-section:last-child {
@@ -51,18 +51,18 @@
         .chart-iframe-container {
             position: relative;
             width: 100%;
-            padding-bottom: 62%; 
+            padding-bottom: 62%;
             height: 0;
             overflow: hidden;
-            border-radius: 8px; 
-            box-shadow: 0 3px 7px rgba(0,0,0,0.06); 
-            transition: box-shadow 0.3s ease; 
+            border-radius: 8px;
+            box-shadow: 0 3px 7px rgba(0,0,0,0.06);
+            transition: box-shadow 0.3s ease;
         }
 
-        .chart-iframe-container.ratio-1 { padding-bottom: 62%; } 
-        .chart-iframe-container.ratio-2 { padding-bottom: 62%; } 
-        .chart-iframe-container.ratio-3 { padding-bottom: 31%; } 
-        .chart-iframe-container.ratio-4 { padding-bottom: 41%; } 
+        .chart-iframe-container.ratio-1 { padding-bottom: 62%; }
+        .chart-iframe-container.ratio-2 { padding-bottom: 62%; }
+        .chart-iframe-container.ratio-3 { padding-bottom: 31%; }
+        .chart-iframe-container.ratio-4 { padding-bottom: 41%; }
 
         .chart-iframe {
             position: absolute;
@@ -71,10 +71,44 @@
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 8px; 
+            border-radius: 8px;
         }
 
+        /* Navigation Tip Styles */
+        #navigation-tip {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 1000; /* Ensure it's on top */
+        }
+
+        #navigation-tip i {
+            font-size: 2em; /* Larger icon */
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        #navigation-tip p {
+            font-size: 0.9em;
+            margin: 0;
+        }
+
+        /* Simple hand cursor style - can be applied to body or container if needed */
+        body {
+            /* cursor: grab;  or cursor: grab; */ /* Optional: change cursor on the whole body if desired */
+        }
+        .container {
+            /* cursor: grab; */ /* Optional: change cursor just for the container area */
+        }
+
+
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
     <div class="container">
@@ -106,16 +140,22 @@
 
     </div>
 
+    <div id="navigation-tip">
+        <i class="fas fa-hand-pointer"></i>
+        <p>Scorri e zooma per navigare</p>
+    </div>
+
     <script>
         function checkPassword() {
-            const base64Password = "ZGVyb3NhMjAyNA=="; 
+            const base64Password = "ZGVyb3NhMjAyNA==";
             const correctPassword = atob(base64Password);
             let password = prompt("Password Required: Access to this page is restricted. Please enter the password to continue.");
             if (password === correctPassword) {
-                document.body.classList.add("visible"); 
+                document.body.classList.add("visible");
             } else {
                 alert("Incorrect password. Access denied.");
-
+                // Optionally, you might want to redirect or close the page here.
+                // For now, we'll just keep them on the blank page.
             }
         }
 
