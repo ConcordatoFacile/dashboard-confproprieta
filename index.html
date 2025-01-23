@@ -87,7 +87,7 @@
             align-items: center;
             z-index: 1001; /* Higher z-index to be on top of everything */
             flex-direction: column; /* Stack icon and text vertically */
-            font-size: 1.5em; /* Larger font size for better visibility */
+            font-size: 1.5em; /* Base font size */
             color: #333;
         }
 
@@ -95,9 +95,8 @@
             display: flex; /* Make it visible when this class is added */
         }
 
-
         #navigation-tip i {
-            font-size: 3em; /* Even larger icon */
+            font-size: 3em; /* Base icon size */
             margin-bottom: 15px;
             display: block; /* Ensure margin works */
         }
@@ -153,12 +152,12 @@
         function checkPassword() {
             const base64Password = "ZGVyb3NhMjAyNA==";
             const correctPassword = atob(base64Password);
-            let password = prompt("Password Required: Access to this page is restricted. Please enter the password to continue.");
+            let password = prompt("Password Richiesta: L'accesso a questa pagina è limitato. Inserisci la password per continuare."); // Password prompt in Italian
             if (password === correctPassword) {
                 document.body.classList.add("visible");
                 showMobileTip(); // Show tip only if password is correct
             } else {
-                alert("Incorrect password. Access denied.");
+                alert("Password errata. Accesso negato."); // Alert in Italian
             }
         }
 
@@ -171,14 +170,34 @@
                 const tip = document.getElementById('navigation-tip');
                 tip.classList.add('visible-tip'); // Make tip visible
 
+                // Increase size for mobile using inline styles
+                tip.style.fontSize = '2em'; // Larger font
+                tip.style.padding = '30px'; // More padding
+                tip.querySelector('i').style.fontSize = '5em'; // Larger icon
+
                 setTimeout(function() {
                     tip.classList.remove('visible-tip'); // Hide tip after 4 seconds
+                    // Reset inline styles after hiding (optional, but good practice)
+                    tip.style.fontSize = '';
+                    tip.style.padding = '';
+                    tip.querySelector('i').style.fontSize = '';
                 }, 4000); // 4000 milliseconds = 4 seconds
+            } else {
+                // For debugging: Log if it's NOT mobile (should not show tip on desktop now)
+                console.log("Not a mobile device - tip should not be visible.");
             }
         }
 
 
         window.onload = checkPassword;
+    </script>
+    <script>
+        // Debugging: Check isMobileDevice on load to ensure it's working correctly
+        if(isMobileDevice()) {
+            console.log("Mobile device detected.");
+        } else {
+            console.log("Desktop device detected.");
+        }
     </script>
 </body>
 </html>
