@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,10 +9,10 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
-            padding: 20px;
-            background-color: #f8f9fa;
+            padding: 0; /* Remove body padding to allow full background color */
+            background-color: #e0e8e0; /* Darker Soft Green Background */
             color: #495057;
-            line-height: 1.7;
+            line-height: 1.6; /* Slightly adjusted line height */
             display: none; /* Hidden initially until password */
         }
 
@@ -21,25 +22,36 @@
 
         .container {
             max-width: 1000px;
-            margin: 30px auto;
-            background-color: #ffffff;
+            margin: 40px auto; /* Increased top/bottom margin for better spacing */
+            background-color: #e0f7e0; /* Soft Green Background for Container */
             padding: 40px;
-            border-radius: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            border-radius: 15px; /* Slightly more rounded corners */
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Slightly stronger shadow */
         }
 
         h1 {
             text-align: center;
             color: #212529;
-            margin-bottom: 40px;
-            font-size: 2.2em;
-            font-weight: 600;
+            margin-bottom: 10px; /* Reduced bottom margin for title */
+            font-size: 2.5em; /* Slightly larger font size for title */
+            font-weight: 700; /* Bolder font weight for title */
+            letter-spacing: -0.01em; /* Minor letter spacing adjustment for readability */
         }
 
+        h2 { /* Subtitle style */
+            text-align: center;
+            color: #6c757d; /* Muted subtitle color */
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 30px; /* Spacing after subtitle */
+            font-style: italic; /* Optional: Italic style for subtitle */
+        }
+
+
         .chart-section {
-            margin-bottom: 50px;
-            border-bottom: 1px solid #e0e0e0;
-            padding-bottom: 40px;
+            margin-bottom: 40px; /* Adjusted margin */
+            border-bottom: 1px solid #e8e8e8; /* Lighter border color */
+            padding-bottom: 30px; /* Adjusted padding */
         }
 
         .chart-section:last-child {
@@ -54,9 +66,10 @@
             padding-bottom: 62%;
             height: 0;
             overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 3px 7px rgba(0,0,0,0.06);
+            border-radius: 10px; /* Slightly more rounded corners for iframes */
+            box-shadow: 0 4px 10px rgba(0,0,0,0.07); /* Adjusted iframe shadow */
             transition: box-shadow 0.3s ease;
+            background-color: white; /* Ensure white background for charts */
         }
 
         .chart-iframe-container.ratio-1 { padding-bottom: 62%; }
@@ -71,24 +84,25 @@
             width: 100%;
             height: 100%;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px; /* Match iframe container border radius */
         }
 
-        /* Full-screen Navigation Tip Styles (initially hidden) */
+        /* Full-screen Navigation Tip Styles */
         #navigation-tip {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(255, 255, 255, 0.8); /* More opaque background */
+            background-color: rgba(255, 255, 255, 0.9); /* Slightly less opaque background for tip */
             display: none; /* Hidden by default */
             justify-content: center; /* Center content vertically and horizontally */
             align-items: center;
             z-index: 1001; /* Higher z-index to be on top of everything */
             flex-direction: column; /* Stack icon and text vertically */
-            font-size: 1.5em; /* Base font size */
-            color: #333;
+            font-size: 1.6em; /* Slightly larger base font size for tip */
+            color: #555; /* Darker color for tip text */
+            text-shadow: 0 1px 1px rgba(0,0,0,0.05); /* Subtle text shadow for tip */
         }
 
         #navigation-tip.visible-tip {
@@ -96,17 +110,18 @@
         }
 
         #navigation-tip i {
-            font-size: 3em; /* Base icon size */
-            margin-bottom: 15px;
+            font-size: 3.5em; /* Slightly larger icon size for tip */
+            margin-bottom: 20px;
             display: block; /* Ensure margin works */
+            color: #4CAF50; /* Green color for the icon to stand out */
         }
 
         #navigation-tip p {
             text-align: center;
-            padding: 0 20px; /* Some horizontal padding for text */
+            padding: 0 30px; /* More horizontal padding for tip text */
             margin: 0;
+            font-weight: 500; /* Medium font weight for tip text */
         }
-
 
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -114,6 +129,7 @@
 <body>
     <div class="container">
         <h1>DASHBOARD CONFPROPRIETA'</h1>
+        <h2>dati aggiornati in tempo reale</h2> <!-- Subtitle added here -->
 
         <!-- Charts remain the same -->
         <div class="chart-section">
@@ -170,10 +186,11 @@
                 const tip = document.getElementById('navigation-tip');
                 tip.classList.add('visible-tip'); // Make tip visible
 
-                // Increase size for mobile using inline styles
-                tip.style.fontSize = '2em'; // Larger font
-                tip.style.padding = '30px'; // More padding
-                tip.querySelector('i').style.fontSize = '5em'; // Larger icon
+                // Increase size for mobile using inline styles (Keep as requested)
+                tip.style.fontSize = '2em';
+                tip.style.padding = '30px';
+                tip.querySelector('i').style.fontSize = '5em';
+
 
                 setTimeout(function() {
                     tip.classList.remove('visible-tip'); // Hide tip after 4 seconds
