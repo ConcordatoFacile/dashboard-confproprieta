@@ -78,7 +78,8 @@
         #navigation-tip {
             position: fixed; /* Keep fixed positioning */
             bottom: 20px;
-            /* Right will be set by JavaScript */
+            right: auto; /* Remove fixed right in CSS, will be set by JS */
+            left: auto; /* Ensure left is not interfering */
             background-color: rgba(255, 255, 255, 0.7); /* Semi-transparent white */
             padding: 15px;
             border-radius: 10px;
@@ -152,8 +153,7 @@
             let password = prompt("Password Required: Access to this page is restricted. Please enter the password to continue.");
             if (password === correctPassword) {
                 document.body.classList.add("visible");
-                // Position the navigation tip after the password is correct and body is visible
-                positionNavigationTip();
+                positionNavigationTip(); // Position tip after making body visible
             } else {
                 alert("Incorrect password. Access denied.");
             }
@@ -162,7 +162,17 @@
         function positionNavigationTip() {
             const tip = document.getElementById('navigation-tip');
             const screenWidth = window.innerWidth;
-            tip.style.right = '20px'; // You can adjust '20px' as needed for margin from the right edge of the *screen*
+            const documentWidth = document.documentElement.offsetWidth; // Get the full document width
+            const tipWidth = tip.offsetWidth; // Get the width of the tip itself
+
+            // Calculate right position: Screen width minus tip width, minus desired margin (20px)
+            const rightPosition = screenWidth - tipWidth - 20;
+
+             // Ensure it's not going into negative values (too close to left edge if screen is very narrow)
+            const calculatedRight = Math.max(20, rightPosition); // At least 20px from right edge
+
+            tip.style.right = calculatedRight + 'px';
+             console.log("Screen Width:", screenWidth, "Document Width:", documentWidth, "Tip Width:", tipWidth, "Calculated Right:", calculatedRight); // Debugging info
         }
 
 
