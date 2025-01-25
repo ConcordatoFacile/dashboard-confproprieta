@@ -1,10 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Redirecting...</title>
-  <meta http-equiv="refresh" content="0; url=https://docs.google.com/spreadsheets/d/1SzQvVQHK_O0JIUivVVpPMJqE9so3rOKt2unjrGtXWOI/edit?usp=sharing">
+  <title>Reindirizzamento...</title>
 </head>
 <body>
-  <p>You are being redirected to the Google Sheet. If you are not redirected automatically, <a href="https://docs.google.com/spreadsheets/d/1SzQvVQHK_O0JIUivVVpPMJqE9so3rOKt2unjrGtXWOI/edit?usp=sharing">click here</a>.</p>
+
+  <h1>Accesso Protetto</h1>
+  <p id="message">Inserisci la password per accedere al contenuto.</p>
+
+  <form id="passwordForm">
+    <label for="passwordInput">Password:</label>
+    <input type="password" id="passwordInput" name="passwordInput">
+    <button type="submit">Accedi</button>
+  </form>
+
+  <p>Se non vieni reindirizzato automaticamente dopo l'accesso, <a id="manualRedirect" href="https://docs.google.com/spreadsheets/d/1SzQvVQHK_O0JIUivVVpPMJqE9so3rOKt2unjrGtXWOI/edit?usp=sharing" style="display:none;">clicca qui</a>.</p>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const passwordForm = document.getElementById('passwordForm');
+      const passwordInput = document.getElementById('passwordInput');
+      const messageElement = document.getElementById('message');
+      const manualRedirectLink = document.getElementById('manualRedirect');
+      const redirectURL = "https://docs.google.com/spreadsheets/d/1SzQvVQHK_O0JIUivVVpPMJqE9so3rOKt2unjrGtXWOI/edit?usp=sharing";
+
+      passwordForm.addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        messageElement.textContent = "Verifica password in corso..."; // Feedback for the user
+
+        fetch('https://raw.githubusercontent.com/ConcordatoFacile/dashboard-confproprieta/refs/heads/main/whitelist.txt')
+          .then(response => response.text())
+          .then(encodedPasswordFromWhitelist => {
+            const passwordFromWhitelist = encodedPasswordFromWhitelist.trim(); // Remove potential whitespace
+            const enteredPassword = passwordInput.value;
+
+            if (passwordFromWhitelist === enteredPassword) {
+              // Password correct
+              messageElement.textContent = "Password corretta. Reindirizzamento in corso...";
+              manualRedirectLink.style.display = "inline"; // Show manual redirect link in case automatic fails
+              setTimeout(function() {
+                window.location.href = redirectURL; // Redirect after a short delay
+              }, 1000); // 1 second delay for feedback
+            } else {
+              // Password incorrect
+              messageElement.textContent = "Password errata. Riprova.";
+              passwordInput.value = ''; // Clear password field
+            }
+          })
+          .catch(error => {
+            console.error('Errore nel recupero della password:', error);
+            messageElement.textContent = "Errore nel recupero della password. Riprova più tardi.";
+          });
+      });
+    });
+  </script>
 </body>
 </html>
