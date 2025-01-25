@@ -1,58 +1,160 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Reindirizzamento...</title>
+  <title>Accesso Protetto</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      text-align: center; /* Center text by default */
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 500px; /* Limit container width */
+    }
+
+    h1 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    #passwordForm {
+      display: flex;
+      flex-direction: column;
+      align-items: stretch; /* Stretch form elements to container width */
+      margin-bottom: 20px;
+    }
+
+    label {
+      margin-bottom: 8px;
+      text-align: left; /* Align label text to the left */
+      color: #333;
+      font-weight: bold;
+    }
+
+    input[type="password"] {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+
+    button[type="submit"] {
+      padding: 12px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s ease;
+    }
+
+    button[type="submit"]:hover {
+      background-color: #0056b3;
+    }
+
+    #manualRedirectParagraph {
+      display: none; /* Initially hidden */
+      margin-top: 20px;
+    }
+
+    #manualRedirect {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    #manualRedirect:hover {
+      text-decoration: underline;
+    }
+
+    #message {
+      min-height: 24px; /* Ensure message area takes up space */
+      color: #dc3545; /* Default to error color */
+      margin-bottom: 15px;
+    }
+
+    #message.success {
+        color: #28a745; /* Success message color */
+    }
+
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Accesso Protetto</h1>
+    <p id="message">Inserisci la password per accedere al contenuto.</p>
 
-  <h1>Accesso Protetto</h1>
-  <p id="message">Inserisci la password per accedere al contenuto.</p>
+    <form id="passwordForm">
+      <label for="passwordInput">Password:</label>
+      <input type="password" id="passwordInput" name="passwordInput">
+      <button type="submit">Accedi</button>
+    </form>
 
-  <form id="passwordForm">
-    <label for="passwordInput">Password:</label>
-    <input type="password" id="passwordInput" name="passwordInput">
-    <button type="submit">Accedi</button>
-  </form>
-
-  <p>Se non vieni reindirizzato automaticamente dopo l'accesso, <a id="manualRedirect" href="https://docs.google.com/spreadsheets/d/1SzQvVQHK_O0JIUivVVpPMJqE9so3rOKt2unjrGtXWOI/edit?usp=sharing" style="display:none;">clicca qui</a>.</p>
+    <p id="manualRedirectParagraph">Se non vieni reindirizzato automaticamente dopo l'accesso, <a id="manualRedirect" href="https://docs.google.com/spreadsheets/d/1SzQvVQHK_O0JIUivVVpPMJqE9so3rOKt2unjrGtXWOI/edit?usp=sharing">clicca qui</a>.</p>
+  </div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function() {
       const passwordForm = document.getElementById('passwordForm');
       const passwordInput = document.getElementById('passwordInput');
       const messageElement = document.getElementById('message');
+      const manualRedirectParagraph = document.getElementById('manualRedirectParagraph'); // Get paragraph element
       const manualRedirectLink = document.getElementById('manualRedirect');
       const redirectURL = "https://docs.google.com/spreadsheets/d/1SzQvVQHK_O0JIUivVVpPMJqE9so3rOKt2unjrGtXWOI/edit?usp=sharing";
 
       passwordForm.addEventListener('submit', function(event) {
         event.preventDefault(); // Prevent default form submission
 
-        messageElement.textContent = "Verifica password in corso..."; // Feedback for the user
+        messageElement.textContent = "Verifica password in corso...";
+        messageElement.classList.remove('success'); // Remove success class in case of previous success
+        messageElement.classList.remove('error');   // Ensure no error class is present
 
         fetch('https://raw.githubusercontent.com/ConcordatoFacile/dashboard-confproprieta/refs/heads/main/whitelist.txt')
           .then(response => response.text())
           .then(encodedPasswordFromWhitelist => {
-            const passwordFromWhitelist = encodedPasswordFromWhitelist.trim(); // Remove potential whitespace
-            // **DECODE the password from whitelist.txt**
+            const passwordFromWhitelist = encodedPasswordFromWhitelist.trim();
             const decodedPasswordFromWhitelist = atob(passwordFromWhitelist);
             const enteredPassword = passwordInput.value;
 
             if (decodedPasswordFromWhitelist === enteredPassword) {
-              // Password correct (plain text "derosa2024" entered)
+              // Password correct
               messageElement.textContent = "Password corretta. Reindirizzamento in corso...";
-              manualRedirectLink.style.display = "inline"; // Show manual redirect link in case automatic fails
+              messageElement.classList.add('success'); // Add success class for green color
+              manualRedirectParagraph.style.display = "block"; // Show manual redirect paragraph
               setTimeout(function() {
-                window.location.href = redirectURL; // Redirect after a short delay
-              }, 1000); // 1 second delay for feedback
+                window.location.href = redirectURL;
+              }, 1000);
             } else {
               // Password incorrect
               messageElement.textContent = "Password errata. Riprova.";
+              messageElement.classList.remove('success'); // Ensure no success class
+              messageElement.classList.add('error'); // Optionally add error class for red color (defined in CSS)
               passwordInput.value = ''; // Clear password field
             }
           })
           .catch(error => {
             console.error('Errore nel recupero della password:', error);
             messageElement.textContent = "Errore nel recupero della password. Riprova più tardi.";
+            messageElement.classList.remove('success'); // Ensure no success class
+            messageElement.classList.add('error');   // Add error class for red color
           });
       });
     });
