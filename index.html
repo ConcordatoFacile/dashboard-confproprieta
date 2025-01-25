@@ -33,10 +33,12 @@
           .then(response => response.text())
           .then(encodedPasswordFromWhitelist => {
             const passwordFromWhitelist = encodedPasswordFromWhitelist.trim(); // Remove potential whitespace
+            // **DECODE the password from whitelist.txt**
+            const decodedPasswordFromWhitelist = atob(passwordFromWhitelist);
             const enteredPassword = passwordInput.value;
 
-            if (passwordFromWhitelist === enteredPassword) {
-              // Password correct
+            if (decodedPasswordFromWhitelist === enteredPassword) {
+              // Password correct (plain text "derosa2024" entered)
               messageElement.textContent = "Password corretta. Reindirizzamento in corso...";
               manualRedirectLink.style.display = "inline"; // Show manual redirect link in case automatic fails
               setTimeout(function() {
